@@ -1,6 +1,6 @@
 {
   "name": "vuexorm-softdelete-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vuex ORM plugin adding soft delete capability. Based on an original idea from Conan Crawford.",
   "author": "Conan Crawford <cj@cjcrawford.com> / Thomas Villaren <tvillaren@gmail.com>",
   "main": "dist/index.js",
