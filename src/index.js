@@ -105,6 +105,18 @@ export default {
             this.dispatch('softDelete', payload);
         }
 
+        Model.prototype.softDelete = async function (condition) {
+            if (condition) {
+                return this.$dispatch('softDelete', condition);
+            }
+
+            if (this.$id === null) {
+                return null;
+            }
+
+            return this.$dispatch('softDelete', this.$id);
+        }
+
         RootMutations.softDelete = function (state, payload) {
             const entity = payload.entity;
             const result = payload.result;

@@ -231,4 +231,21 @@ describe('Vuex SoftDelete plugin default installation', function () {
         expect(result2.length).to.equal(1);
     });
 
+    it('Can soft delete from instance', function () {
+        const store = createStore([{
+            model: User
+        }]);
+
+        store.dispatch('entities/users/create', {
+            data: userDefaultList
+        });
+
+        const user = User.find(1);
+        user.softDelete();
+
+        let result = store.getters['entities/allTrashed']();
+        expect(result.length).to.equal(1);
+        expect(result[0].id).to.equal(1);
+    });
+
 });
