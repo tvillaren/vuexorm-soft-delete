@@ -178,17 +178,19 @@ const users = User.query()
 
 You can override the default flag & key names by setting the corresponding options at plugin initialization.
 
-| Option name | Description                           | Default value |
-| ----------- | ------------------------------------- | :-----------: |
-| flagName    | Sets the name of the _isDeleted_ flag | `$isDeleted`  |
-| key         | Sets the name of the _deleted_at_ key | `deleted_at`  |
+| Option name           | Description                                   | Default value |
+| --------------------- | --------------------------------------------- | :-----------: |
+| flagName              | Sets the name of the _isDeleted_ flag         | `$isDeleted`  |
+| key                   | Sets the name of the _deleted_at_ key         | `deleted_at`  |
+| exposeFlagsExternally | Adds the flags to the JSON stringified output |    `true`     |
 
 In order to use those options, you can pass them as the second parameter of the `install` call:
 
 ```javascript
 VuexORM.use(VuexORMSoftDeletePlugin, {
     flagName: 'IsMarkedForDeletion',
-    key: 'date_of_deletion'
+    key: 'date_of_deletion',
+    exposeFlagsExternally: true
 });
 ```
 

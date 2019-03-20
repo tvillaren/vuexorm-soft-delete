@@ -248,4 +248,24 @@ describe('Vuex SoftDelete plugin default installation', function () {
         expect(result[0].id).to.equal(1);
     });
 
+    it('should expose flags by default', async function () {
+        const store = createStore([{
+            model: User
+        }]);
+
+        let user = new User({
+            id: 1,
+            roleId: 1,
+            name: "Test",
+            email: "Test"
+        });
+
+        User.insert({
+            data: [user]
+        });
+
+        let u = store.getters['entities/users/find'](1);
+        expect(JSON.stringify(u)).to.equal('{"id":1,"name":"Test","email":"Test","phone":"","roleId":1,"role":null,"deleted_at":null,"$isDeleted":false}');
+    });
+
 });

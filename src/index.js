@@ -2,6 +2,7 @@ export const defaultOptions = {
     key: 'deleted_at',
     flagName: '$isDeleted',
     debug: false,
+    exposeFlagsExternally: true,
     mode: null // [hide, deleted, all]
 }
 
@@ -24,6 +25,23 @@ export default {
 
         Query.prototype.softDeleteOptions = {
             ...pluginOptions
+        }
+
+        /**
+         * Flags are exposed by default when stringiying into JSON.
+         * This can be deactivated by setting the flag to false
+         */
+        if (pluginOptions.exposeFlagsExternally) {
+            const localFieldModel = {
+                [pluginOptions.key]: Model.attr(false),
+                [pluginOptions.flagName]: Model.attr(false)
+            };
+
+            const _saveGetFiedsMethod = Model.prototype.$fields;
+            Model.prototype.$fields = function () {
+                const existing = _saveGetFiedsMethod.call(this);
+                return Object.assign({}, existing, localFieldModel);
+            }
         }
 
         /**
