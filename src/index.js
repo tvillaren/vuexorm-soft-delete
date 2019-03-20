@@ -122,9 +122,7 @@ export default {
             const result = payload.result;
             const where = payload.where
 
-            const query = new Query(state, entity);
-
-            query.setResult(result).softDelete(where);
+            result.data = (new Query(state, entity)).softDelete(where);
         };
 
         RootActions.softDelete = function (context, payload) {
